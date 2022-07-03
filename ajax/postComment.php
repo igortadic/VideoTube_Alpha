@@ -17,9 +17,10 @@ if(isset($_POST['commentText']) && isset($_POST['postedBy']) && isset($_POST['vi
     $responseTo = $_POST['responseTo'];
     $commentText = $_POST['commentText'];
 
+    $userLoggedInObj = new User($con, $_SEESION["userLoggedInObj"])
+
     $query->execute();
 
-    $userLoggedInObj = new User($con, $_SEESION["userLoggedInObj"])
     $newComment = new Comment($con, $con->lastInsertId(), $userLoggedInObj, $videoId);
     echo $newComment->create();
 
