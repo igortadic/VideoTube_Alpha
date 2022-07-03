@@ -25,11 +25,21 @@ class VideoInfoControls {
   }
 
   private function createReplyButton() {
-    return
+    $text = "REPLY";
+    $action = "toggleReply(this)";
+
+    return ButtonProvider::createButton($text, null, $action, null);
   }
 
   private function createLikesCount() {
-    return
+    $text = $this->comment->getLikes();
+
+    if($text == 0) {
+      $text = "";
+    }
+
+    return "<span class='likesCount'>$text</span>";
+
   }
 
   private function createReplySection() {
