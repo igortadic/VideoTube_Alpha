@@ -18,10 +18,13 @@ class VideoInfoControls {
     $dislikeBUtton = $this->createDislikeButton();
     $replySection = $this->createReplySection();
 
-    return "<div class='controls>
+    return "<div class='controls'>
+      $replyButton
+      $likesCount
       $likeButton
       $dislikeBUtton
-    </div>'"
+    </div>
+    $replySection";
   }
 
   private function createReplyButton() {
@@ -43,7 +46,24 @@ class VideoInfoControls {
   }
 
   private function createReplySection() {
-    return "";
+    $postedBy = $this->userLoggedInObj->getUsername();
+    $videoId = $this->comment->getVideoId();
+    $commentId = $this->comment->getId();
+
+    $profileButton = ButtonProvider::createUserProfileButton($this->$con, $postedBy);
+
+    $cancelButtonAction = "toggleReply(this)";
+    $cancelButton = ButtonProvider::createButton("Cancel", null, $commentAction, "cancelComment");
+
+    $postButtonAction = "postComment(this, \"$postedBy\", $videoId, $commentId, \"repliesSection\")";
+    $postButton = ButtonProvider::createButton("Reply", null, $postButtonAction, "postComment");
+
+    return "<div class='commentForm hidden'>
+        $profileButton
+        <textarea class='commentBodyClass' placeholder='Add a comment'></textarea>
+        $cancelButton
+        $postButton
+      </div>";
   }
 
   private function createLikeButton() {
