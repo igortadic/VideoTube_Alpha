@@ -46,5 +46,25 @@ class Comment {
     </div>'";
   }
 
+  public function getLikes() {
+    $query = $this->con->prepare("SELECT count(*) as 'count' FROM likes WHERE commentId =:commentId");
+    $query->bindParam(":commentId", $commendId);
+    $commentId = $this->getId();
+    $query->execute();
+
+    $data = $query->FETCH(PDO::FETCH_ASSOC);
+    $numLikes = $data["count"];
+
+    $query = $this->con->prepare("SELECT count(*) as 'count' FROM dislikes WHERE commentId =:commentId");
+    $query->bindParam(":commentId", $commendId);
+    $commentId = $this->getId();
+    $query->execute();
+
+    $data = $query->FETCH(PDO::FETCH_ASSOC);
+    $numDislikes = $data["count"];
+
+    return $numLikes - $numDislikes;
+  }
+
 }
 ?>
