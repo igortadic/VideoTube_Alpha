@@ -16,3 +16,10 @@ function postComment(button, postedBy, videoId, replyTo, containerClass) {
     alert("Posting a comment failed");
   }
 }
+
+function toggleReply(button) {
+  var parent = $(button).closest(".itemContainer");
+  var commentForm = parent.find(".commentForm").first();
+
+  commentForm.toggleClass("hiddnen");
+}
