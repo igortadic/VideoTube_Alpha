@@ -160,5 +160,44 @@ class Comment {
     return $numLikes - $numDislikes;
   }
 
+  public function like() {
+    $id = $this->getId();
+
+    $username = $this->userLoggedInObj->getUsername();
+
+    if($query-rowCount() > 0) {
+      // User  has already liked.
+      $query = $this->con->prepare("DELETE FROM likes WHERE username=:username AND videoId=:videoId");
+      $query->bindParam(":username", $username);
+      $query->bindParam(":videoId", $id);
+      $query->execute();
+
+      $result = array(
+        "likes" => -1,
+        "dislikes" => 0
+      );
+      return json_encode($result);
+
+    } else {
+      // User has not already liked
+      $query = $this->con->prepare("DELETE FROM dislikes WHERE username=:username AND videoId=:videoId");
+      $query->bindParam(":username", $username);
+      $query->bindParam(":videoId", $id);
+      $query->execute();
+      $count = $query->rowCount();
+
+      $query = $this->con->prepare("INSERT INTO likes(username, videoId) VALUES(:username, :videoId)");
+      $query->bindParam(":username", $username);
+      $query->bindParam(":videoId", $id);
+      $query->execute();
+
+      $result = array(
+        "likes" => 1,
+        "dislikes" => 0 - $count
+      );
+      return json_encode($result);
+    }
+  }
+
 }
 ?>
