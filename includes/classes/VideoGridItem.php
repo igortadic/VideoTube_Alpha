@@ -33,7 +33,11 @@ class VideoGridItem {
   }
 
   private function createDetails() {
-    return
+    $title = $this->video->getTitle();
+    $username = $this->video->getUploadedby();
+    $views = $this->video->getViews();
+    $description = $this->video->getDescription();
+    $timestamp = $this->video->getTimestamp();
   }
 
 }

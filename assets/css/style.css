@@ -372,3 +372,46 @@ a:hover {
 .hidden {
   display:none !important;
 }
+
+.comments .repliesSection {
+  padding-left: 64px;
+  margin-top: 16px;
+}
+
+.commentSection .itemContainer .viewReplies {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.videoGrid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.suggestions .videoGridItem {
+  display: flex;
+  height: auto;
+}
+
+.videoGridItem {
+  margin-right: 4px;
+  margin:bottom: 24px;
+}
+
+.videoGridItem .thumbnail {
+  width: 210px;
+  height: 118px;
+  position: relative;
+}
+
+.videoGridItem .thumbnail img {
+  width: 100%;
+  height: 100%;
+}
+
+.videoGridItem .thumbnail .duration {
+bottom: 0;
+right: 0;
+position: absolute;
+}

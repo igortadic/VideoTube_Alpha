@@ -1,12 +1,10 @@
 <?php require_once("includes/header.php"); ?>
 
-<?php
-if(isset($_SESSION["userLoggedIn"])) {
-  echo "user is logged in as " . $userLoggedInObj->getName();
-} else {
-  echo "not logged in";
-}
-?>
-
+<div class="videoSection">
+  <?php
+  $videoGrid = new VideoGrid($con, $userloggedInObj->getUsername());
+  echo $videoGrid->create(null, "Suggested", false);
+  ?>
+</div>
 
 <?php require_once("includes/footer.php"); ?>
