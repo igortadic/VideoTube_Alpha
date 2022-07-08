@@ -19,11 +19,20 @@ class VideoGridItem {
     <a/>"
   }
 
-  private function createThumb() {
-    return
+  private function createThumbnail() {
+
+    $thumbnail = $this->video->getThumbnail();
+    $duration  = $this->video->getDuration();
+
+    return "<div class='thumbnail'>
+      <img src='$thumbinal'>
+      <div class='duration'>
+        <span>$duration</span>
+      </div>
+    </div>";
   }
 
-  private function createThumb() {
+  private function createDetails() {
     return
   }
 
